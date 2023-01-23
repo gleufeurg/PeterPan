@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float MovementSpeed = 10f;
-    public float jumpforce = 100f;
+    [Range(0,1000)] public float MovementSpeed;
+    [Range(0, 50)] public float jumpforce;
 
     public Rigidbody rb;
 
@@ -19,10 +19,20 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        //Movements
         Movement();
+    }
+
+    private void Update()
+    {
+        //Jump
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Jump();
+            Debug.Log("bipbip");
+        }
     }
 
     private void Movement()
@@ -36,6 +46,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        
+        velocity = new Vector3(velocity.x, jumpforce, velocity.z);
+        rb.velocity = velocity;
     }
 }
