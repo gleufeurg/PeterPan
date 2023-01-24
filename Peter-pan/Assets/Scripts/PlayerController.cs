@@ -5,20 +5,29 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Privates")]
+    [SerializeField] private bool endedJumpEarly = false;
+    [SerializeField] [Range(0, 100)] private float addedFallSpeed;
+
+    [Space(25)]
+
+    [Header("Physics")]
+
     [Range(0,1000)] public float MovementSpeed;
-    [Range(0, 50)] public float jumpforce;
+    [Range(0, 50)]  public float jumpforce;
+    [Range(0, 100)] public float fallSpeed;
 
     public Rigidbody rb;
 
     private Vector3 velocity = Vector3.zero;
 
-    // Start is called before the first frame update
+
     void Start()
     {
+        //Get References
         rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         //Movements
@@ -28,10 +37,14 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         //Jump
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             Jump();
-            Debug.Log("bipbip");
+            //Debug.Log("Jumping");
+        }
+        else if (Input.GetKeyUp(KeyCode.Space))
+        {
+            endedJumpEarly = true;
         }
     }
 
@@ -39,13 +52,28 @@ public class PlayerController : MonoBehaviour
     {
         float hMovement = Input.GetAxisRaw("Horizontal") * MovementSpeed * Time.deltaTime;
         float vMovement = Input.GetAxisRaw("Vertical") * MovementSpeed * Time.deltaTime;
-        velocity = new Vector3(hMovement,rb.velocity.y, vMovement);
-
+        
+        velocity = new Vector3(hMovement, velocity.y, vMovement);
         rb.velocity = velocity;
+
+        Debug.Log("velocity.y = " + velocity.y);
     }
 
     private void Jump()
     {
+        if (endedJumpEarly && rb.velocity.y > 0)
+        {
+            //velocity.y -= (addedFallSpeed + fallSpeed) * Time.deltaTime;
+            velocity.y = 0;
+
+            Debug.Log("Should have stopped");
+        }
+        else
+        {
+            velocity.y -= fallSpeed * Time.deltaTime;
+            Debug.Log("velocity.y = " + velocity.y);
+        }
+
         velocity = new Vector3(velocity.x, jumpforce, velocity.z);
         rb.velocity = velocity;
     }
