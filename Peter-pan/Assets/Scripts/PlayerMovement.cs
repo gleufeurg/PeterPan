@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
-            Debug.Log("bipbip");
+            //Debug.Log("bipbip");
         }
     }
 

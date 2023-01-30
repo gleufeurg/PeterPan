@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] private GameObject attackArea = default;
+    [SerializeField] private Animator animator;
 
     [SerializeField] private bool attacking = false;
 
@@ -15,6 +16,7 @@ public class PlayerAttack : MonoBehaviour
     void Start()
     {
         attackArea = transform.GetChild(0).gameObject;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -42,5 +44,6 @@ public class PlayerAttack : MonoBehaviour
     {
         attacking = true;
         attackArea.SetActive(attacking);
+        animator.Play("Stab");
     }
 }
