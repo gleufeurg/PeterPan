@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    /// ===================================///
+    ///             NOT IN USE             ///
+    /// ===================================///
+
     [Header("Privates")]
     [SerializeField] private bool endedJumpEarly = false;
     [SerializeField] [Range(0, 100)] private float addedFallSpeed;

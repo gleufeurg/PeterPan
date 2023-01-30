@@ -132,14 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1417702451, guid: 9588d0a961b21b74298262974f2f829b, type: 3}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some generic clip(s) animate transforms that are
-        already bound by a Humanoid avatar. These transforms can only be changed
-        by Humanoid clips.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-        'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-        'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'mixamo.com'\n\tFrom
-        animation clip 'mixamo.com'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1692618323, guid: 9588d0a961b21b74298262974f2f829b, type: 3}
       propertyPath: animator
@@ -152,6 +145,10 @@ PrefabInstance:
     - target: {fileID: 2760767503899792547, guid: 9588d0a961b21b74298262974f2f829b, type: 3}
       propertyPath: m_Center.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4073811593754201089, guid: 9588d0a961b21b74298262974f2f829b, type: 3}
+      propertyPath: m_WarningMessage
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 4273133109714335424, guid: 9588d0a961b21b74298262974f2f829b, type: 3}
       propertyPath: m_RootOrder
@@ -215,6 +212,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9588d0a961b21b74298262974f2f829b, type: 3}
+--- !u!1001 &246944967
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.375965
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 3.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4273133109714335428, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_Name
+      value: Pirate
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +417,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 394b77335cb7f2c4db41dc669bdaf64a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -431,7 +485,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 864171933}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
+  m_Avatar: {fileID: 9000000, guid: 3511d12bc69c730409cae2fb34be4299, type: 3}
   m_Controller: {fileID: 9100000, guid: 11cf2e3570986ff4e91e1f51694ec5e9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -498,6 +552,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5620842259845046701, guid: e1a30b8963ab1854a853f9527936378a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2397f436cd41baf419d04e7ef128187c, type: 2}
     - target: {fileID: 5620842259845046703, guid: e1a30b8963ab1854a853f9527936378a, type: 3}
       propertyPath: m_Name
       value: ground

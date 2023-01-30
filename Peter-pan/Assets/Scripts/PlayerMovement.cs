@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Space(20f)]
     [Header("References")]
 
     //Refs
@@ -13,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     public Rigidbody rb;
 
-    [Space(25f)]
+    [Space(20f)]
     [Header("Animations")]
 
     //Animation States
@@ -32,14 +31,15 @@ public class PlayerMovement : MonoBehaviour
     //Stats
     [SerializeField] [Range(0, 10)] private float timeToAttack = 0.25f;
     [Range(0, 1000)] public float movementSpeed;
-    [Range(0, 50)] public float jumpforce;
+    [Range(0, 50)]   public float jumpforce;
 
     [Space(20f)]
     [Header("Others to verify")]
 
     //Others
     [SerializeField] private bool attacking = false;
-    [SerializeField] private bool isGrounded = true;
+    [SerializeField] private bool isGrounded;
+    [SerializeField] private bool isMoving;
     [SerializeField] private int groundMask;
     [SerializeField] private string currentState;
     [SerializeField] [Range(0, 10)] private float timer = 0f;
@@ -106,29 +106,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Get Horizontal & Vertical Axis
-        float hMovement = Input.GetAxisRaw("Horizontal") * movementSpeed * Time.deltaTime;
-        float vMovement = Input.GetAxisRaw("Vertical") * movementSpeed * Time.deltaTime;
-
-        Debug.Log(hMovement);
-        Debug.Log(vMovement);
-
-        //Change the animation state from Run to Idle & Idle to Run
-        if (hMovement >= 0.25f || vMovement >= 0.25f)
-        {
-            ChangeAnimationState(PLAYER_RUN);
-        }
-        else if (hMovement <= -0.25f || vMovement <= -0.25f)
-        {
-            ChangeAnimationState(PLAYER_RUN);
-        }
-        else if(hMovement >= -0.25f && vMovement >= -0.25f && hMovement <= 0.25f && vMovement <= 0.25f)
-        {
-            ChangeAnimationState(PLAYER_IDLE);
-        }
-
         //Movements
-        Movement(hMovement, vMovement);
+        Movement();
 
         //Ground check
         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.3f, groundMask);
@@ -142,9 +121,36 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Movement(float _hMovement, float _vMovement)
+    private void Movement()
     {
-        velocity = new Vector3(_hMovement, rb.velocity.y, _vMovement);
+        /*if (rb.velocity.y != 0 || rb.velocity.z != 0)
+        {
+            isMoving = true;
+        }
+        else if (rb.velocity.y == 0 || rb.velocity.z == 0)
+        {
+            isMoving = false;
+        }*/
+
+        //Get Horizontal & Vertical Axis
+        float hMovement = Input.GetAxisRaw("Horizontal") * movementSpeed * Time.deltaTime;
+        float vMovement = Input.GetAxisRaw("Vertical") * movementSpeed * Time.deltaTime;
+
+        //Debug.Log("hMovement = " + hMovement);
+        //Debug.Log("vMovement = " + vMovement);
+        //Debug.Log(isMoving);
+
+        //Change the animation state from Run to Idle & Idle to Run
+        if (hMovement >= 0.25f || vMovement >= 0.25f || hMovement <= -0.25f || vMovement <= -0.25f)
+        {
+            ChangeAnimationState(PLAYER_RUN);
+        }
+        /*else if (hMovement >= -0.25f && vMovement >= -0.25f && hMovement <= 0.25f && vMovement <= 0.25f && isMoving == false)
+        {
+            ChangeAnimationState(PLAYER_IDLE);
+        }*/
+
+        velocity = new Vector3(hMovement, rb.velocity.y, vMovement);
 
         rb.velocity = velocity;
         
@@ -165,7 +171,6 @@ public class PlayerMovement : MonoBehaviour
     
     private void Taunt()
     {
-        attacking = true;
         attackArea.SetActive(attacking);
         ChangeAnimationState(PLAYER_TAUNT);
     }
@@ -186,14 +191,12 @@ public class PlayerMovement : MonoBehaviour
 
     private void Block()
     {
-        attacking = true;
         attackArea.SetActive(attacking);
         ChangeAnimationState(PLAYER_BLOCK);
     }
 
     private void Death()
     {
-        attacking = true;
         attackArea.SetActive(attacking);
         ChangeAnimationState(PLAYER_DEATH);
     }
