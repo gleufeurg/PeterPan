@@ -16,11 +16,11 @@ public class PirateController : MonoBehaviour
 
     //Animation States
     //const string PIRATE_IDLE = "Idle";
+    //const string PIRATE_RUN = "Slow Run";
     const string PIRATE_STAB = "Stab";
     const string PIRATE_SLASH = "Inward Slash";
     const string PIRATE_HEAVYATTACK = "Heavy Attack";
     const string PIRATE_BLOCK = "Block";
-    //const string PIRATE_RUN = "Slow Run";
     const string PIRATE_DEATH = "Death";
 
     [Space(20f)]
@@ -30,6 +30,8 @@ public class PirateController : MonoBehaviour
     [SerializeField] private bool attacking = false;
     [SerializeField] private string currentState;
     [SerializeField] private const string PIRATE_Death = "Death";
+    [SerializeField] [Range(0, 10)] private float timer = 0f;
+    [SerializeField] [Range(0, 10)] private float timeToAttack = 0.25f;
 
 
     private void Start()
@@ -39,11 +41,29 @@ public class PirateController : MonoBehaviour
         attackArea = transform.GetChild(0).gameObject;
     }
 
+    private void Update()
+    {
+        //Hitboxe timer when attacking
+        if (attacking)
+        {
+            timer += Time.deltaTime;
+
+            if (timer >= timeToAttack)
+            {
+                timer = 0;
+                attacking = false;
+                attackArea.SetActive(attacking);
+            }
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Dead");
         Death();
     }
+
+    #region Actions
 
     private void Stab()
     {
@@ -68,16 +88,18 @@ public class PirateController : MonoBehaviour
 
     private void Block()
     {
-        attackArea.SetActive(attacking);
         ChangeAnimationState(PIRATE_BLOCK);
     }
 
     private void Death()
     {
-        attackArea.SetActive(attacking);
         ChangeAnimationState(PIRATE_DEATH);
     }
 
+    #endregion
+
+    //Call this Method to change/play animation
+    //Name of the new animation in parameter
     private void ChangeAnimationState(string newState)
     {
         if (currentState == newState) return;

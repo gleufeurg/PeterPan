@@ -131,6 +131,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1417702451, guid: 9588d0a961b21b74298262974f2f829b, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1417702451, guid: 9588d0a961b21b74298262974f2f829b, type: 3}
       propertyPath: m_WarningMessage
       value: 
       objectReference: {fileID: 0}
@@ -219,6 +223,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1031910320, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: m_Icon
+      value: 
+      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+    - target: {fileID: 2449825948402882919, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 896558584}
     - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -496,6 +508,11 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!95 &896558584 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1417702451, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
+  m_PrefabInstance: {fileID: 246944967}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &1417702451 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1417702451, guid: 9588d0a961b21b74298262974f2f829b, type: 3}

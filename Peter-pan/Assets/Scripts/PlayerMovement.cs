@@ -29,7 +29,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Stats")]
 
     //Stats
-    [SerializeField] [Range(0, 10)] private float timeToAttack = 0.25f;
     [Range(0, 1000)] public float movementSpeed;
     [Range(0, 50)]   public float jumpforce;
 
@@ -40,10 +39,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool attacking = false;
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool isMoving;
-    [SerializeField] private int groundMask;
+    [SerializeField] private int groundMask = 3;
     [SerializeField] private string currentState;
     [SerializeField] [Range(0, 10)] private float timer = 0f;
+    [SerializeField] [Range(0, 10)] private float stabDelay = 0.75f;
+    [SerializeField] [Range(0, 10)] private float slashDelay = 1f;
+    [SerializeField] [Range(0, 10)] private float timeToAttack = 0.25f;
     [SerializeField] private Vector3 velocity = Vector3.zero;
+    [SerializeField] private LayerMask whatIsGround;
 
 
     void Start()
@@ -65,14 +68,15 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("bipbip");
         }
 
-        //Input actions
+        #region Inputs Actions
+
         if (Input.GetKeyDown(KeyCode.A))
         {
             Block();
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
-            Stab();
+            StartCoroutine(AttackDelay(stabDelay));
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -91,6 +95,10 @@ public class PlayerMovement : MonoBehaviour
             Death();
         }
 
+        #endregion
+
+        //Hitboxe attacking timer
+        //Depend of the attack
         if (attacking)
         {
             timer += Time.deltaTime;
@@ -123,38 +131,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void Movement()
     {
-        /*if (rb.velocity.y != 0 || rb.velocity.z != 0)
-        {
-            isMoving = true;
-        }
-        else if (rb.velocity.y == 0 || rb.velocity.z == 0)
-        {
-            isMoving = false;
-        }*/
-
         //Get Horizontal & Vertical Axis
         float hMovement = Input.GetAxisRaw("Horizontal") * movementSpeed * Time.deltaTime;
         float vMovement = Input.GetAxisRaw("Vertical") * movementSpeed * Time.deltaTime;
 
-        //Debug.Log("hMovement = " + hMovement);
-        //Debug.Log("vMovement = " + vMovement);
-        //Debug.Log(isMoving);
+        velocity = new Vector3(hMovement, rb.velocity.y, vMovement);
+        rb.velocity = velocity;
 
         //Change the animation state from Run to Idle & Idle to Run
         if (hMovement >= 0.25f || vMovement >= 0.25f || hMovement <= -0.25f || vMovement <= -0.25f)
         {
             ChangeAnimationState(PLAYER_RUN);
         }
-        /*else if (hMovement >= -0.25f && vMovement >= -0.25f && hMovement <= 0.25f && vMovement <= 0.25f && isMoving == false)
-        {
-            ChangeAnimationState(PLAYER_IDLE);
-        }*/
-
-        velocity = new Vector3(hMovement, rb.velocity.y, vMovement);
-
-        rb.velocity = velocity;
-        
     }
+
+    #region Actions
 
     private void Jump()
     {
@@ -199,6 +190,17 @@ public class PlayerMovement : MonoBehaviour
     {
         attackArea.SetActive(attacking);
         ChangeAnimationState(PLAYER_DEATH);
+    }
+
+    #endregion
+
+    private IEnumerator AttackDelay(float _delay)
+    {
+        print("YAAAAAAH !!!");
+        yield return new WaitForSeconds(_delay);
+        Stab();
+        print("stabbed");
+        //For the example I call stab here but it has to be optimised later
     }
 
     private void ChangeAnimationState(string newState)
