@@ -146,6 +146,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2726089974281193038, guid: 9588d0a961b21b74298262974f2f829b, type: 3}
+      propertyPath: m_TagString
+      value: Attack
+      objectReference: {fileID: 0}
     - target: {fileID: 2760767503899792547, guid: 9588d0a961b21b74298262974f2f829b, type: 3}
       propertyPath: m_Center.y
       value: 0
@@ -223,14 +227,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1031910320, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
-    - target: {fileID: 2449825948402882919, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
-      propertyPath: animator
-      value: 
-      objectReference: {fileID: 896558584}
     - target: {fileID: 4273133109714335424, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -390,12 +386,12 @@ GameObject:
   - component: {fileID: 864171939}
   - component: {fileID: 864171938}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Hurtboxe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &864171934
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -508,11 +504,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!95 &896558584 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1417702451, guid: 18f872346dd23db4bb51646069c93a9a, type: 3}
-  m_PrefabInstance: {fileID: 246944967}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &1417702451 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1417702451, guid: 9588d0a961b21b74298262974f2f829b, type: 3}

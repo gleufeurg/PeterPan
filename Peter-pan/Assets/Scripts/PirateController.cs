@@ -8,7 +8,6 @@ public class PirateController : MonoBehaviour
 
     //Refs
     [SerializeField] private GameObject attackArea = default;
-    [SerializeField] private Collider hurtbox;
     [SerializeField] Animator animator;
 
     [Space(20f)]
@@ -29,7 +28,6 @@ public class PirateController : MonoBehaviour
     //Others
     [SerializeField] private bool attacking = false;
     [SerializeField] private string currentState;
-    [SerializeField] private const string PIRATE_Death = "Death";
     [SerializeField] [Range(0, 10)] private float timer = 0f;
     [SerializeField] [Range(0, 10)] private float timeToAttack = 0.25f;
 
@@ -37,7 +35,6 @@ public class PirateController : MonoBehaviour
     private void Start()
     {
         animator.GetComponent<Animator>();
-        hurtbox.GetComponent<Collider>();
         attackArea = transform.GetChild(0).gameObject;
     }
 
@@ -59,8 +56,11 @@ public class PirateController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Dead");
-        Death();
+        if(other.CompareTag("Attack"))
+        {
+            Debug.Log("Dead");
+            Death();
+        }
     }
 
     #region Actions
