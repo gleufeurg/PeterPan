@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PirateController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PirateController : MonoBehaviour
     //Refs
     [SerializeField] private GameObject attackArea = default;
     [SerializeField] Animator animator;
+    [SerializeField] NavMeshAgent navMesh;
+    //[SerializeField] Animator animator;
 
     [Space(20f)]
     [Header("Animations")]
@@ -102,10 +105,13 @@ public class PirateController : MonoBehaviour
     //Name of the new animation in parameter
     private void ChangeAnimationState(string newState)
     {
+        //Prevent an animation to override itself
         if (currentState == newState) return;
 
+        //Play the new animation
         animator.Play(newState);
 
+        //Change the current state animation to the new animation
         currentState = newState;
     }
 
